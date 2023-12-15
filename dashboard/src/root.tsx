@@ -1,7 +1,6 @@
 // @refresh reload
 import { type Component, Suspense } from "solid-js";
 import {
-  A,
   Body,
   ErrorBoundary,
   FileRoutes,
@@ -11,36 +10,25 @@ import {
   Routes,
   Scripts,
   Title,
-  useLocation
 } from "solid-start";
 import "./root.css";
+import { NavBar } from "~/components/layout/NavBar";
 
 const Root: Component = () => {
-  const location = useLocation();
-  const active = (path: string):string =>
-    path === location.pathname
-      ? "border-sky-600"
-      : "border-transparent hover:border-sky-600";
+
   return (
     <Html lang="en">
       <Head>
-        <Title>SolidStart - With TailwindCSS</Title>
+        <Title>Dashboard - billets</Title>
         <Meta charset="utf-8" />
         <Meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Body>
         <Suspense>
           <ErrorBoundary>
-            <nav class="bg-sky-800">
-              <ul class="container flex items-center p-3 text-gray-200">
-                <li class={`border-b-2 ${active("/")} mx-1.5 sm:mx-6`}>
-                  <A href="/">Home</A>
-                </li>
-                <li class={`border-b-2 ${active("/about")} mx-1.5 sm:mx-6`}>
-                  <A href="/about">About</A>
-                </li>
-              </ul>
-            </nav>
+            <header class="absolute inset-x-0 top-0 z-50 flex h-16 border-b border-gray-900/10">
+              <NavBar />
+            </header>
             <Routes>
               <FileRoutes />
             </Routes>
@@ -49,7 +37,7 @@ const Root: Component = () => {
         <Scripts />
       </Body>
     </Html>
-  );
+);
 }
 
 export default Root;
