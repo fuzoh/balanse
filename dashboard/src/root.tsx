@@ -1,7 +1,6 @@
 // @refresh reload
-import { Suspense } from "solid-js";
+import { type Component, Suspense } from "solid-js";
 import {
-  useLocation,
   A,
   Body,
   ErrorBoundary,
@@ -12,13 +11,14 @@ import {
   Routes,
   Scripts,
   Title,
+  useLocation
 } from "solid-start";
 import "./root.css";
 
-export default function Root() {
+const Root: Component = () => {
   const location = useLocation();
-  const active = (path: string) =>
-    path == location.pathname
+  const active = (path: string):string =>
+    path === location.pathname
       ? "border-sky-600"
       : "border-transparent hover:border-sky-600";
   return (
@@ -51,3 +51,5 @@ export default function Root() {
     </Html>
   );
 }
+
+export default Root;
