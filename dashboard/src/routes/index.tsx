@@ -4,6 +4,20 @@ import { StatsContainer } from "~/components/stats/StatsContainer";
 import { StatsElement } from "~/components/stats/StatsElement";
 import { ActivitiesContainer } from "~/components/activity/ActivitiesContainer";
 import { ActivitiesTable } from "~/components/activity/ActivitiesTable";
+import { type EventRegistration } from "~/dto/EventRegistration";
+
+const events = [{
+  id: "XXXX2941J6SY",
+  detailsLink: "https://toto.tutu.com/events/12345",
+  name: "My super event",
+  eventId: 12345,
+  customer: "Toto Tutu",
+  customerZip: 1234,
+  price: 10.00,
+  currency: "CHF",
+  type: "online_presale"
+}
+] satisfies EventRegistration[];
 
 export const Home: Component = () => {
   const links = [
@@ -35,7 +49,7 @@ export const Home: Component = () => {
       <div class="space-y-16 py-16 xl:space-y-20">
         {/* <!-- Recent activity table --> */}
         <ActivitiesContainer title="Derniers billets vendus">
-          <ActivitiesTable />
+          <ActivitiesTable activities={events} />
         </ActivitiesContainer>
 
       </div>
