@@ -1,36 +1,25 @@
 package ch.hearc.balanse;
 
+import ch.hearc.balanse.dto.TicketMessage;
 import io.smallrye.mutiny.Multi;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.reactive.messaging.Channel;
-import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.jboss.resteasy.reactive.RestStreamElementType;
 
 @Path("/ticket")
 public class TicketResource {
 
     @Inject
-    @Channel("new-tickets")
-    Emitter<Ticket> tickerRequestEmitter;
-
-    @Inject
     @Channel("tickets")
-    Multi<Ticket> tickets;
-
-    @POST
-    @Path("/webhook")
-    @Consumes(MediaType.TEXT_PLAIN)
-    @Produces()
-    public void newTicketRequest(String ticket) {
-        tickerRequestEmitter.send(new Ticket(ticket));
-    }
+    Multi<TicketMessage> tickets;
 
     @GET
     @Path("/sse")
+    @Produces(MediaType.SERVER_SENT_EVENTS)
     @RestStreamElementType(MediaType.APPLICATION_JSON)
-    public Multi<Ticket> stream() {
+    public Multi<TicketMessage> stream() {
         return tickets;
     }
 }
