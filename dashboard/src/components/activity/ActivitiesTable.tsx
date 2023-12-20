@@ -2,10 +2,10 @@ import { type Component, For } from "solid-js";
 import { SeparatorRow } from "~/components/activity/table/SeparatorRow";
 import { HeadingRow } from "~/components/activity/table/HeadingRow";
 import { DataRow } from "~/components/activity/table/DataRow";
-import { type EventRegistration } from "~/dto/EventRegistration";
+import { type TicketMessage } from "~/services/TicketMessage";
 
 interface Props {
-  activities: EventRegistration[];
+  activities: TicketMessage[];
 }
 
 export const ActivitiesTable: Component<Props> = (props) => {

@@ -1,8 +1,8 @@
 import { type Component } from "solid-js";
-import { type EventRegistration } from "~/dto/EventRegistration";
+import { type TicketMessage } from "~/services/TicketMessage";
 
 interface Props {
-  data: EventRegistration;
+  data: TicketMessage;
 }
 
 export const DataRow: Component<Props> = (props) => {
@@ -19,7 +19,7 @@ export const DataRow: Component<Props> = (props) => {
           <div class="flex-auto">
             <div class="flex items-start gap-x-3">
               <div class="text-sm font-medium leading-6 text-gray-900">
-                {props.data.name} - #{props.data.eventId}
+                {props.data.name} - #{props.data.petzi_number}
               </div>
               <div
                 class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset"
@@ -32,7 +32,7 @@ export const DataRow: Component<Props> = (props) => {
               </div>
             </div>
             <div class="mt-1 text-xs leading-5 text-gray-500">
-              {props.data.price} {props.data.currency}
+              {props.data.price}.- CHF
             </div>
           </div>
         </div>
@@ -41,15 +41,15 @@ export const DataRow: Component<Props> = (props) => {
       </td>
       <td class="hidden py-5 pr-6 sm:table-cell">
         <div class="text-sm leading-6 text-gray-900">
-          {props.data.customer}
+          {props.data.buyer}
         </div>
         <div class="mt-1 text-xs leading-5 text-gray-500">
-          NPA: {props.data.customerZip}
+          NPA: {props.data.buyer_npa}
         </div>
       </td>
       <td class="py-5 text-right">
         <div class="flex justify-end">
-          <a href={props.data.detailsLink}
+          <a href="#"
              class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">
             Détails<span class="hidden sm:inline"> du billet</span><span
             class="sr-only">, billet #{props.data.id}</span>
