@@ -76,11 +76,12 @@ def notify_event_to_message_broker(event_id: uuid.UUID, event: dict) -> None:
     """
     message_payload = {
         'id': str(event_id),
+        'type': event['details']['ticket']['type'],
         'redis_key': 'petzi-ticket',
         'buyer': f"{event['details']['buyer']['firstName']} {event['details']['buyer']['lastName']}",
-        'buyer_npa': event['details']['buyer']['postcode'],
+        'buyer_npa': int(event['details']['buyer']['postcode']),
         'petzi_number': event['details']['ticket']['number'],
         'name': event['details']['ticket']['event'],
-        'price': event['details']['ticket']['price']['amount']
+        'price': float(event['details']['ticket']['price']['amount'])
     }
     kafka_producer.produce('tickets', json.dumps(message_payload))
