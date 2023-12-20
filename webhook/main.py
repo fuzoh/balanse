@@ -4,7 +4,7 @@ import json
 import uuid
 
 import redis
-from confluent_kafka import Producer
+from kafka import KafkaProducer
 from flask import Flask, request, make_response, Response
 from redis.commands.json.path import Path
 
@@ -13,13 +13,19 @@ app = Flask(__name__)
 secret = 'my-super-secret'
 
 # Establish redis connection
-r = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
+r = redis.Redis(host='redis', port=6379, db=0, decode_responses=True)
 
 # Kafka connection
-kafka_producer = Producer({
-    'bootstrap.servers': 'localhost:9092',
-    'client.id': 'flask-petzi-webhook'
-})
+kafka_producer = KafkaProducer(
+    bootstrap_servers=['kafka:29092'],
+    request_timeout_ms=10000,
+    value_serializer=lambda x: json.dumps(x).encode('utf-8')
+)
+
+
+@app.route("/")
+def health() -> str:
+    return "Webhook server is running!"
 
 
 @app.post("/petzi-webhook")
@@ -64,7 +70,7 @@ def save_event_to_database(event: dict) -> uuid.UUID:
     :param event:
     """
     event_id = uuid.uuid4()
-    r.json().set(f'petzi-ticket:{id}', Path.root_path(), event)
+    r.json().set(f'petzi-ticket:{event_id}', Path.root_path(), event)
     return event_id
 
 
@@ -84,4 +90,9 @@ def notify_event_to_message_broker(event_id: uuid.UUID, event: dict) -> None:
         'name': event['details']['ticket']['event'],
         'price': float(event['details']['ticket']['price']['amount'])
     }
-    kafka_producer.produce('tickets', json.dumps(message_payload))
+    future = kafka_producer.send('tickets', message_payload)
+    future.get(timeout=10)
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=3337, debug=True)

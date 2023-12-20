@@ -8,13 +8,25 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - "22181:2181"
+    healthcheck:
+      test: nc -z localhost 2181 || exit 1
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
   
   kafka:
     image: confluentinc/cp-kafka:latest
     depends_on:
-      - zookeeper
+      zookeeper:
+        condition: service_healthy
     ports:
       - "9092:9092"
+    healthcheck:
+      test: ["CMD", "kafka-topics", "--bootstrap-server", "kafka:29092", "--list"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -22,6 +34,7 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: true
 
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
@@ -42,6 +55,19 @@ services:
     volumes:
       - ./redis-data:/data
 
+  webhook:
+    image: balanse/webhook
+    build:
+      context: ./webhook
+      dockerfile: Dockerfile
+    ports:
+      - 3337:3337
+    depends_on:
+      redis:
+        condition: service_started
+      kafka:
+        condition: service_healthy
+  
   dashboard:
     image: balanse/dashboard
     build:
