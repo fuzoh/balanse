@@ -1,0 +1,12 @@
+services:
+  dashboard:
+    image: balanse/dashboard
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+
+networks:
+  balanse:
+    driver: bridge
