@@ -16,6 +16,13 @@ public class TicketResource {
     Multi<TicketMessage> tickets;
 
     @GET
+    @Path("/health")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String health() {
+        return "ok";
+    }
+
+    @GET
     @Path("/sse")
     @Produces(MediaType.SERVER_SENT_EVENTS)
     @RestStreamElementType(MediaType.APPLICATION_JSON)
