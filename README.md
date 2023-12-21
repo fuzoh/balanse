@@ -1,10 +1,10 @@
 # Balanse
 > Balanse is a little demonstrator of a simple messaging infrastructure.
-> Developped for the module "Enterprise Architecture" at HE-ARC.
-> It exposes a webhook in python that sents messages to a kafka broker.
-> Then a quarqus app listen to the kafka topic and stream events to a web app with server sent events.
+> Developed for the module "Enterprise Architecture" at HE-ARC.
+> It exposes a web hook in python that sends messages to a Kafka broker.
+> Then a Quarqus app listen to the Kafka topic and stream events to a web app with server sent events.
 
-## Lauch services for demonstration
+## Launch services for demonstration
 
 > **WARNING**: The provided docker compose is just for demonstration purpose. There is
 > no support for development or production environment (no hot reload, no security, no backup).
@@ -17,16 +17,16 @@ docker-compose up -d --build
 # The first time will take som time, because it will download all dependencies, and build app containers (you can found Dockerfiles in project dedicated directories).
 ```
 
-You can now access app :
+You can now access the app :
 - [http://localhost:3000](http://localhost:3000) for the web app dashboard.
-- [http://localhost:3337/petzi-webhook](http://localhost:3337/petzi-webhook) for the webhook endpoint.
-- [http://localhost:28080](http://localhost:28080) for kafka UI.
-- [http://localhost:8001](http://localhost:8001) for redis insights.
-- **Quarkus app doesn’t have compose service for now.**
+- [http://localhost:3337/petzi-webhook](http://localhost:3337/petzi-webhook) for the web hook endpoint.
+- [http://localhost:28080](http://localhost:28080) for Kafka UI.
+- [http://localhost:8001](http://localhost:8001) for Redis insights.
+- [http://localhost:8080/ticket/health](http://localhost:8080/ticket/health) server with server sent event.
 
 ## Development
 
-Pre-requisites:
+Prerequisites:
 - Docker and docker compose
 - An IDE with java 21 jdk
 - Node js 18+
@@ -34,7 +34,7 @@ Pre-requisites:
 
 Then, you can start docker-compose-dev.yaml to start database and message broker.
 
-The you can start each app independently :
+Then you can start each app independently :
 ```
 # Webhook
 cd webhook
