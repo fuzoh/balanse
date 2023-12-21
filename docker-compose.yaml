@@ -68,6 +68,19 @@ services:
       kafka:
         condition: service_healthy
   
+  quarkus:
+    image: balanse/server-quarkus
+    build:
+      context: ./server-quarkus
+      dockerfile: src/main/docker/Dockerfile.jvm
+    ports:
+      - 8080:8080
+    depends_on:
+      kafka:
+        condition: service_healthy
+      redis:
+        condition: service_started
+
   dashboard:
     image: balanse/dashboard
     build:
@@ -75,6 +88,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3000:3000
+    depends_on:
+      - quarkus
 
 networks:
   balanse:
