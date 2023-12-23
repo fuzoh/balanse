@@ -13,13 +13,13 @@ app = Flask(__name__)
 secret = 'my-super-secret'
 
 # Establish redis connection
-# Switch below comment line depending if you run app fron the container or locally
+# Switch below comment line depending on if you run app from the container or locally
 r = redis.Redis(host='redis', port=6379, db=0, decode_responses=True)
 # r = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
 
 # Kafka connection
 kafka_producer = KafkaProducer(
-    # Switch below comment line depending if you run app fron the container or locally
+    # Switch below comment line depending on if you run app from the container or locally
     bootstrap_servers=['kafka:29092'],
     # bootstrap_servers=['localhost:9092'],
     request_timeout_ms=10000,

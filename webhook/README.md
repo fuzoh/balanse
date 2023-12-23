@@ -9,9 +9,9 @@ This folder contains a little flask app that expose a webhook.
 python3 -m venv .venv
 source .venv/bin/activate
 
-# Install dependencies
-pip install -r requirements.txt
+# Install dependencies (from pyproject.toml)
+pip install .
 
 # Start flask app
-flask --app main run
+flask --app main run # or python3 main.py
 ```
