@@ -5,7 +5,7 @@ COPY . /app
 WORKDIR /app
 
 # Install dependencies
-RUN pip3 install --no-cache -r requirements.txt
+RUN pip3 install --no-cache -e .
 
 EXPOSE 3337
 # Start flask dev server
