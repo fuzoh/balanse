@@ -1,12 +1,15 @@
 # Dashboard
 
+This dashboard web app is build with [SolidJS](https://www.solidjs.com), [Solid start](https://start.solidjs.com) and [Tailwind CSS](https://tailwindcss.com).
+
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
 ```bash
-npm run dev
+# Install dependencies
+pnpm i # or npm i
+# Start the dev server
+pnpm dev # or npm run dev
 
 # or start the server and open the app in a new browser tab
-npm run dev -- --open
+pnpm run dev -- --open
 ```

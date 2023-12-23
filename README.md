@@ -22,7 +22,7 @@ You can now access the app :
 - [http://localhost:3337/petzi-webhook](http://localhost:3337/petzi-webhook) for the web hook endpoint.
 - [http://localhost:28080](http://localhost:28080) for Kafka UI.
 - [http://localhost:8001](http://localhost:8001) for Redis insights.
-- [http://localhost:8080/ticket/health](http://localhost:8080/ticket/health) server with server sent event.
+- [http://localhost:8080/q/health](http://localhost:8080/ticket/health) server with server sent event.
 
 ## Development
 
@@ -34,20 +34,7 @@ Prerequisites:
 
 Then, you can start docker-compose-dev.yaml to start database and message broker.
 
-Then you can start each app independently :
-```
-# Webhook
-cd webhook
-python3 -m venv .venv
-source .venv/bin/activate
-python main.py
-
-# Quarkus app
-cd server-quarkus
-./gradlew quarkusDev
-
-# Web app dashboard
-cd dashboard
-pnpm i # or npm i
-pnpm dev # or npm run dev
-```
+Then you can start each app independently depending on dev needs, see README.md in each app directory :
+- [dashboard](dashboard/README.md)
+- [webhook](webhook/README.md)
+- [server-quarkus](server-quarkus/README.md)
