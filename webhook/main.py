@@ -42,6 +42,7 @@ def hello_world() -> Response:
     assert verify_message_age(signature_parts['t'], 10)
 
     event = request.json
+    event['details']['ticket']['price']['amount'] = float(event['details']['ticket']['price']['amount'])
     ticket_id = save_event_to_database(event)
     notify_event_to_message_broker(ticket_id, event)
 
@@ -92,7 +93,7 @@ def notify_event_to_message_broker(event_id: uuid.UUID, event: dict) -> None:
         'buyer_npa': int(event['details']['buyer']['postcode']),
         'petzi_number': event['details']['ticket']['number'],
         'name': event['details']['ticket']['event'],
-        'price': float(event['details']['ticket']['price']['amount'])
+        'price': event['details']['ticket']['price']['amount']
     }
     future = kafka_producer.send('tickets', message_payload)
     future.get(timeout=10)
