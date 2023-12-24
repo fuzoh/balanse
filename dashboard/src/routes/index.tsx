@@ -51,18 +51,18 @@ export default function Home() {
       <div class="relative isolate overflow-hidden pt-16">
         <SubNavigation title="Billeterie" links={[]} />
 
-        <Show when={stats()}>
+        <Show when={computedStats()}>
           {(s) => (
             <StatsContainer>
               <StatsElement
-                value={`${computedStats().stats.sell} CHF`}
+                value={`${s().stats.sell} CHF`}
                 title="Revenu"
-                progress={computedStats().progress.sell}
+                progress={s().progress.sell}
               />
               <StatsElement
-                value={`${computedStats().stats.amount} billets`}
+                value={`${s().stats.amount} billets`}
                 title="Ventes"
-                progress={computedStats().progress.amount}
+                progress={s().progress.amount}
               />
             </StatsContainer>
           )}
