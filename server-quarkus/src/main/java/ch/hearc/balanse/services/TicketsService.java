@@ -8,8 +8,13 @@ import jakarta.inject.Inject;
 @ApplicationScoped
 public class TicketsService {
 
-    @Inject
     RedisDataSource dataSource;
+
+    public TicketsService(RedisDataSource dataSource) {
+        // Redis connection is injected by Quarkus
+        this.dataSource = dataSource;
+        checkIfTicketIndexExists(); // Called only when service is created -> approx one time per app lifetime
+    }
 
     /**
      * Query redis indexes to get count of tickets and totoal price of all tickets sell
@@ -56,5 +61,29 @@ public class TicketsService {
         }
     }
 
+    void checkIfTicketIndexExists() {
+        System.out.println("Checking if index exists");
+        try {
+            // Check if index exists -> throws exception if not
+            dataSource.execute("FT.INFO", "idx:ticket-price");
+        } catch (Exception e) {
+            // Create index if FT.INFO throws exception
+            dataSource.execute(
+                    "FT.CREATE",
+                    "idx:ticket-price",
+                    "ON",
+                    "JSON",
+                    "PREFIX",
+                    "1",
+                    "petzi-ticket:",
+                    "SCHEMA",
+                    "$.details.ticket.price.amount",
+                    "AS",
+                    "ticket_price",
+                    "NUMERIC",
+                    "SORTABLE"
+            );
+        }
+    }
 
 }
