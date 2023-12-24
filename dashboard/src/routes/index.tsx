@@ -1,31 +1,68 @@
-import { type Component } from "solid-js";
+import { type Component, createMemo, createResource, Show } from "solid-js";
 import { SubNavigation } from "~/components/layout/SubNavigation";
 import { StatsContainer } from "~/components/stats/StatsContainer";
 import { StatsElement } from "~/components/stats/StatsElement";
 import { ActivitiesContainer } from "~/components/activity/ActivitiesContainer";
 import { ActivitiesTable } from "~/components/activity/ActivitiesTable";
 import createTicketEventSource from "~/services/TicketEventSourceService";
+import { type TicketStats } from "~/dto/TicketStats";
+import { type TicketStatsWithProgress } from "~/dto/TicketStatsWithProgress";
 
 export const Home: Component = () => {
-  const links = [
-    { href: "/last-five-days", label: "5 derniers jours" },
-    { href: "/last-day", label: "Dernier jour" },
-    { href: "/last-hour", label: "Dérnière heure" },
-  ]
-
   const tickets = createTicketEventSource();
+  const [stats] = createResource(async () => {
+    const response = await fetch("//localhost:8080/ticket/stats");
+    return await response.json() as TicketStats;
+  });
+
+  // Observe tickets store and set new optimistic value to stats
+  const computedStats = createMemo<TicketStatsWithProgress>((lastValue) => {
+    // Compute total (form first data load and from SSE new data)
+    const amount = (stats()?.amount ?? 0) + tickets.length;
+    const sell = (stats()?.sell ?? 0) + tickets.reduce((acc, ticket) => acc + ticket.price, 0);
+    if (lastValue === undefined || tickets.length === 0) {
+      return {
+        stats: {
+          amount,
+          sell
+        },
+        progress: {
+          amount: 0,
+          sell: 0
+        }
+      };
+    } else {
+      return {
+        stats: {
+          amount,
+          sell
+        },
+        progress: {
+          // Compute progress from last value
+          amount: ((amount - lastValue.stats.amount) / lastValue.stats.amount) * 100,
+          sell: ((sell - lastValue.stats.sell) / lastValue.stats.sell) * 100
+        }
+      };
+    }
+  });
 
   return (
     <main>
       <div class="relative isolate overflow-hidden pt-16">
-        <SubNavigation title="Billeterie" links={links} />
+        <SubNavigation title="Billeterie" links={[]} />
 
-        <StatsContainer>
-          <StatsElement value={12443} title="Nombre de billets vendus" progress={15} />
-          <StatsElement value={20} title="Revenu" progress={20} />
-          <StatsElement value={12443} title="Nombre de billets vendus" progress={15} />
-          <StatsElement value={12443} title="Nombre de billets vendus" progress={15} />
-        </StatsContainer>
+        <Show when={stats()}>
+          {(s) => (
+            <StatsContainer>
+              <StatsElement value={`${computedStats().stats.sell} CHF`}
+                            title="Revenu"
+                            progress={computedStats().progress.sell} />
+              <StatsElement value={`${computedStats().stats.amount} billets`}
+                            title="Ventes"
+                            progress={computedStats().progress.amount} />
+            </StatsContainer>
+          )}
+        </Show>
 
         <div
           class="absolute left-0 top-full -z-10 mt-96 origin-top-left translate-y-40 -rotate-90 transform-gpu opacity-20 blur-3xl sm:left-1/2 sm:-ml-96 sm:-mt-10 sm:translate-y-0 sm:rotate-0 sm:transform-gpu sm:opacity-50"
@@ -45,6 +82,6 @@ export const Home: Component = () => {
       </div>
     </main>
   );
-}
+};
 
 export default Home;

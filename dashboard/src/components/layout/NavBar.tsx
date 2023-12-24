@@ -12,7 +12,6 @@ export const NavBar: Component = () => {
       <nav
         class="hidden sm:h-16 sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
         <NavLink href="/">Home</NavLink>
-        <NavLink href="/config">Config</NavLink>
       </nav>
     </nav>
   );

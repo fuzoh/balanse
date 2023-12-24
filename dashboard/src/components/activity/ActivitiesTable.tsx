@@ -3,6 +3,7 @@ import { SeparatorRow } from "~/components/activity/table/SeparatorRow";
 import { HeadingRow } from "~/components/activity/table/HeadingRow";
 import { DataRow } from "~/components/activity/table/DataRow";
 import { type TicketMessage } from "~/dto/TicketMessage";
+import { EmptyRow } from "~/components/activity/table/EmptyRow";
 
 interface Props {
   activities: TicketMessage[];
@@ -16,16 +17,13 @@ export const ActivitiesTable: Component<Props> = (props) => {
       </ thead>
       <tbody>
       <SeparatorRow>
-        <time dateTime="2023-03-22">Today</time>
+        <time dateTime="2023-03-22">Aujourd'hui</time>
       </SeparatorRow>
 
-      <For each={props.activities}>
+      <For each={props.activities} fallback={<EmptyRow />}>
         {(item) => <DataRow data={item} />}
       </For>
 
-      <SeparatorRow>
-        <time dateTime="2023-03-21">Yesterday</time>
-      </SeparatorRow>
       </tbody>
     </table>
   );

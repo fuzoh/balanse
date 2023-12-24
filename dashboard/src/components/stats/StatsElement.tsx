@@ -3,9 +3,10 @@ import { Progress } from "~/components/stats/Progress";
 
 interface Props {
   title: string;
-  value: number;
+  value: string;
   progress: number;
 }
+
 export const StatsElement: Component<Props> = (props) => {
   return (
     <div
@@ -17,5 +18,5 @@ export const StatsElement: Component<Props> = (props) => {
         class="w-full flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">{props.value}
       </dd>
     </div>
-  )
-}
+  );
+};
