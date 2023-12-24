@@ -8,14 +8,17 @@ from kafka import KafkaProducer
 from flask import Flask, request, make_response, Response
 from redis.commands.json.path import Path
 
+from create_redis_index_for_tickets import create_redis_index_for_tickets
+
 app = Flask(__name__)
 
 secret = 'my-super-secret'
 
 # Establish redis connection
 # Switch below comment line depending on if you run app from the container or locally
-r = redis.Redis(host='redis', port=6379, db=0, decode_responses=True)
-# r = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
+
+create_redis_index_for_tickets(r)
+
 
 # Kafka connection
 kafka_producer = KafkaProducer(
