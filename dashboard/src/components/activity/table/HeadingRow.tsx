@@ -7,5 +7,5 @@ export const HeadingRow: Component = () => {
       <th class="hidden sm:table-cell">Client</th>
       <th>Détails</th>
     </tr>
-  )
-}
+  );
+};

@@ -13,17 +13,16 @@ export const ActivitiesTable: Component<Props> = (props) => {
   return (
     <table class="w-full text-left">
       <thead class="sr-only">
-      <HeadingRow />
-      </ thead>
+        <HeadingRow />
+      </thead>
       <tbody>
-      <SeparatorRow>
-        <time dateTime="2023-03-22">Aujourd'hui</time>
-      </SeparatorRow>
+        <SeparatorRow>
+          <time dateTime="2023-03-22">Aujourd'hui</time>
+        </SeparatorRow>
 
-      <For each={props.activities} fallback={<EmptyRow />}>
-        {(item) => <DataRow data={item} />}
-      </For>
-
+        <For each={props.activities} fallback={<EmptyRow />}>
+          {(item) => <DataRow data={item} />}
+        </For>
       </tbody>
     </table>
   );

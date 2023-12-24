@@ -3,6 +3,7 @@ import { type Component, type JSX } from "solid-js";
 interface Props {
   children: JSX.Element;
 }
+
 export const StatsContainer: Component<Props> = (props) => {
   return (
     <div class="border-b border-b-gray-900/10 lg:border-t lg:border-t-gray-900/5">
@@ -10,5 +11,5 @@ export const StatsContainer: Component<Props> = (props) => {
         {props.children}
       </dl>
     </div>
-  )
-}
+  );
+};

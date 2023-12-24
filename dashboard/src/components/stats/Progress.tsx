@@ -10,7 +10,7 @@ export const Progress: Component<Props> = (props) => {
     if (val > 0) return "+";
     if (val < 0) return "-";
     return "";
-  }
+  };
 
   return (
     <dd
@@ -18,10 +18,12 @@ export const Progress: Component<Props> = (props) => {
       classList={{
         "text-gray-700": props.value === 0,
         "text-green-600": props.value > 0,
-        "text-rose-600": props.value < 0
+        "text-rose-600": props.value < 0,
       }}
     >
-      {prefix(props.value)}{Math.abs(props.value)}{props.unit}
+      {prefix(props.value)}
+      {Math.abs(props.value)}
+      {props.unit}
     </dd>
-  )
-}
+  );
+};
