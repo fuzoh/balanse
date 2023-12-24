@@ -3,7 +3,6 @@ package ch.hearc.balanse.services;
 import ch.hearc.balanse.dto.TicketsStats;
 import io.quarkus.redis.datasource.RedisDataSource;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class TicketsService {
