@@ -1,5 +1,5 @@
 import { createStore } from "solid-js/store";
-import { type TicketMessage } from "~/services/TicketMessage";
+import { type TicketMessage } from "~/dto/TicketMessage";
 
 const createTicketEventSource = (): TicketMessage[] => {
   const [tickets, setTickets] = createStore<TicketMessage[]>([]);

@@ -2,7 +2,7 @@ import { type Component, For } from "solid-js";
 import { SeparatorRow } from "~/components/activity/table/SeparatorRow";
 import { HeadingRow } from "~/components/activity/table/HeadingRow";
 import { DataRow } from "~/components/activity/table/DataRow";
-import { type TicketMessage } from "~/services/TicketMessage";
+import { type TicketMessage } from "~/dto/TicketMessage";
 
 interface Props {
   activities: TicketMessage[];

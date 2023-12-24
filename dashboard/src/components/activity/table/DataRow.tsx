@@ -1,5 +1,5 @@
 import { type Component } from "solid-js";
-import { type TicketMessage } from "~/services/TicketMessage";
+import { type TicketMessage } from "~/dto/TicketMessage";
 
 interface Props {
   data: TicketMessage;

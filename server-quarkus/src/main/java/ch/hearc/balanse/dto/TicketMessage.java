@@ -9,29 +9,28 @@ import java.util.UUID;
 public class TicketMessage implements Serializable {
 
     @JsonProperty("id")
-    private UUID id;
+    public UUID id;
 
     @JsonProperty("redis_key")
-    private String redisKey;
+    public String redisKey;
 
     @JsonProperty("type")
-    private String type;
+    public String type;
 
     @JsonProperty("buyer")
-    private String buyer;
+    public String buyer;
 
     @JsonProperty("buyer_npa")
-    private int buyerNpa;
-
+    public int buyerNpa;
 
     @JsonProperty("petzi_number")
-    private String petziNumber;
+    public String petziNumber;
 
     @JsonProperty("name")
-    private String name;
+    public String name;
 
     @JsonProperty("price")
-    private Double price;
+    public Double price;
 
     public TicketMessage() {
     }
@@ -49,62 +48,6 @@ public class TicketMessage implements Serializable {
         this.price = price;
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getRedisKey() {
-        return redisKey;
-    }
-
-    public void setRedisKey(String redisKey) {
-        this.redisKey = redisKey;
-    }
-
-    public String getBuyer() {
-        return buyer;
-    }
-
-    public void setBuyer(String buyer) {
-        this.buyer = buyer;
-    }
-
-    public int getBuyerNpa() {
-        return buyerNpa;
-    }
-
-    public void setBuyerNpa(int buyerNpa) {
-        this.buyerNpa = buyerNpa;
-    }
-
-    public String getPetziNumber() {
-        return petziNumber;
-    }
-
-    public void setPetziNumber(String petziNumber) {
-        this.petziNumber = petziNumber;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -116,13 +59,5 @@ public class TicketMessage implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 }
