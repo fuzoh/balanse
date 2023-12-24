@@ -19,8 +19,8 @@ dependencies {
     testImplementation 'io.quarkus:quarkus-junit5'
 }
 
-group 'org.acme'
-version '1.0.0-SNAPSHOT'
+group 'ch.hearc.balanse'
+version '0.0.3'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
