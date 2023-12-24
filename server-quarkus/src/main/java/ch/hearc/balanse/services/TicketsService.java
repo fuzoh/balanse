@@ -8,8 +8,6 @@ import jakarta.inject.Inject;
 @ApplicationScoped
 public class TicketsService {
 
-    private static final String TICKET_KEY_PREFIX = "petzi-ticket";
-
     @Inject
     RedisDataSource dataSource;
 
@@ -46,10 +44,16 @@ public class TicketsService {
                 "@ticket_price",
                 "AS",
                 "total_price");
-        return new TicketsStats(
-                ticketCount.get("results").iterator().next().get("extra_attributes").get("total_count").toInteger(),
-                ticketSells.get("results").iterator().next().get("extra_attributes").get("total_price").toDouble()
-        );
+        // Try to get the results from redis query
+        try {
+            return new TicketsStats(
+                    ticketCount.get("results").iterator().next().get("extra_attributes").get("total_count").toInteger(),
+                    ticketSells.get("results").iterator().next().get("extra_attributes").get("total_price").toDouble()
+            );
+        } catch (Exception e) {
+            // If redis query failed, return 0 for both values (this happens when no tickets are present in redis)
+            return new TicketsStats(0, 0);
+        }
     }
 
 
