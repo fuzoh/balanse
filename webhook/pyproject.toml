@@ -7,3 +7,6 @@ dependencies = [
   "redis~=5.0.1",
   "kafka-python~=2.0.2"
 ]
+
+[tool.setuptools]
+py-modules = []
