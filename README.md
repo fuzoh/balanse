@@ -9,7 +9,7 @@
 > **WARNING**: The provided docker compose is just for demonstration purpose. There is
 > no support for development or production environment (no hot reload, no security, no backup).
 
-```bash
+```shell script
 # Clone the repository
 # Start docker compose
 docker-compose up -d --build
@@ -23,6 +23,12 @@ You can now access the app :
 - [http://localhost:28080](http://localhost:28080) for Kafka UI.
 - [http://localhost:8001](http://localhost:8001) for Redis insights.
 - [http://localhost:8080/q/health](http://localhost:8080/ticket/health) server with server sent event.
+
+### Test with webhook simulator
+
+```shell script
+python3 petzi_simulator.py http://127.0.0.1:3337/petzi-webhook my-super-secret
+```
 
 ## Development
 
