@@ -4,6 +4,8 @@
 > It exposes a web hook in python that sends messages to a Kafka broker.
 > Then a Quarqus app listen to the Kafka topic and stream events to a web app with server sent events.
 
+**Requirements**: Docker and docker compose
+
 ## Launch services for demonstration
 
 > **WARNING**: The provided docker compose is just for demonstration purpose. There is
@@ -14,7 +16,7 @@
 # Start docker compose
 docker-compose up -d --build
 # This will start all databases services, and build each portion of the app.
-# The first time will take som time, because it will download all dependencies, and build app containers (you can found Dockerfiles in project dedicated directories).
+# The first time will take som time, because it will download all dependencies, and build app containers (you can found Dockerfiles in project dedicated directories). About 5 minutes on modest hardware.
 ```
 
 You can now access the app :
