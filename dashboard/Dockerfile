@@ -16,6 +16,7 @@ RUN pnpm run build
 # Run the app
 FROM base
 COPY --from=build /app/node_modules /app/node_modules
-COPY --from=build /app/dist /app/dist
+COPY --from=build /app/.output /app/.output
+COPY --from=build /app/.vinxi /app/.vinxi
 EXPOSE 3000
 CMD [ "pnpm", "start" ]
