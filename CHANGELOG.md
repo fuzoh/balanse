@@ -1,6 +1,20 @@
 # Changelog
 
 
+## v0.1.0...v0.1.1
+
+[compare changes](https://github.com/fuzoh/balanse/compare/v0.1.0...v0.1.1)
+
+### 🩹 Fixes
+
+- **dashboard:** Access stats via Show getter to prevent undefined ([5c2e0a1](https://github.com/fuzoh/balanse/commit/5c2e0a1))
+- **dashboard:** New build folder in docker file ([ee1d2bc](https://github.com/fuzoh/balanse/commit/ee1d2bc))
+
+### 🏡 Chore
+
+- **dashboard:** Update to solid-start 0.4 ([4818e97](https://github.com/fuzoh/balanse/commit/4818e97))
+- **dashboard:** Fix all dependency changes to work with solid-start 0.4 ([cedbd3e](https://github.com/fuzoh/balanse/commit/cedbd3e))
+
 ## v0.0.3...v0.1.0
 
 [compare changes](https://github.com/fuzoh/balanse/compare/v0.0.3...v0.1.0)
