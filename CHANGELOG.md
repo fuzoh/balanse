@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.1...v1.0.0
+
+[compare changes](https://github.com/fuzoh/balanse/compare/v0.1.1...v1.0.0)
+
+### 🚀 Enhancements
+
+- **dashboard:** Add little arrow to progress stats ([6a83a01](https://github.com/fuzoh/balanse/commit/6a83a01))
+
+### 📖 Documentation
+
+- Fix docker command name ([e030e93](https://github.com/fuzoh/balanse/commit/e030e93))
+
 ## v0.1.0...v0.1.1
 
 [compare changes](https://github.com/fuzoh/balanse/compare/v0.1.0...v0.1.1)
