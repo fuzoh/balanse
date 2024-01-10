@@ -14,7 +14,7 @@
 ```shell script
 # Clone the repository
 # Start docker compose
-docker-compose up -d --build
+docker compose up -d --build
 # This will start all databases services, and build each portion of the app.
 # The first time will take som time, because it will download all dependencies, and build app containers (you can found Dockerfiles in project dedicated directories). About 5 minutes on modest hardware.
 ```
@@ -40,7 +40,7 @@ Prerequisites:
 - Node js 18+
 - Python 3.11
 
-Then, you can start docker-compose-dev.yaml to start database and message broker.
+Then, you can start `docker-compose-dev.yaml` to start database and message broker.
 
 Then you can start each app independently depending on dev needs, see README.md in each app directory :
 - [dashboard](dashboard/README.md)
